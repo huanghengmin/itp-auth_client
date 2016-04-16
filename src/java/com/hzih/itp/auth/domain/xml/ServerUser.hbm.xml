@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="serverUser" name="com.hzih.itp.auth.domain.ServerUser">
+        <id access="field" name="id" type="int" column="id" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="serverType" length="4" column="serverType" access="field" type="int" />
+        <property name="serverName" length="30" column="serverName" access="field" type="string"/>
+        <property name="ipPort" length="30" column="ipPort" access="field" type="string"/>
+        <property name="serverUser" length="30" column="serverUser" access="field" type="string"/>
+        <property name="serverPwd" length="30" column="serverPwd" access="field" type="string"/>
+        <property name="permission" length="4" column="permission" access="field" type="int"/>
+        <property name="dir" length="30" column="dir" access="field" type="string"/>
+        <property name="createTime"  column="createTime" access="field" type="java.util.Date"/>
+
+        <set cascade="save-update" access="field" lazy="false" table="client_server" name="clients">
+            <key column="serverId"/>
+            <many-to-many class="com.hzih.itp.auth.domain.ClientUser" column="clientId"/>
+        </set>
+    </class>
+</hibernate-mapping>
